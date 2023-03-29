@@ -4,8 +4,10 @@ import { s } from "./App.style";
 import { Header } from "./components/Header/Header";
 import { CardTodo } from "./components/CardTodo/CardTodo";
 import { useState } from "react";
+import { TabBottomMenu } from "./components/TabBottomMenu/TabBottomMenu";
 
 export default function App() {
+  const [selectedTabName, setSelectedTabName] = useState("all");
   const [todoList, setTodoList] = useState([
     { id: 1, title: "Learn React Native", isCompleted: true },
     { id: 2, title: "Learn React Native", isCompleted: false },
@@ -48,7 +50,10 @@ export default function App() {
         </SafeAreaView>
       </SafeAreaProvider>
       <View style={s.footer}>
-        <Text>Footer</Text>
+        <TabBottomMenu
+          onPress={setSelectedTabName}
+          selectedTabName={selectedTabName}
+        />
       </View>
     </>
   );
