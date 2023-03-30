@@ -1,7 +1,14 @@
-import { s } from "./TabBottomMenu.style";
 import { Text, TouchableOpacity, View } from "react-native";
+import { s } from "./TabBottomMenu.style";
+export function TabBottomMenu({ selectedTabName, onPress, todoList }) {
+  const countByStatus = todoList.reduce(
+    (acc, todo) => {
+      todo.isCompleted ? acc.done++ : acc.inProgress++;
+      return acc;
+    },
+    { all: todoList.length, inProgress: 0, done: 0 }
+  );
 
-export function TabBottomMenu({ selectedTabName, onPress }) {
   function getTextStyle(tabName) {
     return {
       fontWeight: "bold",
@@ -10,14 +17,16 @@ export function TabBottomMenu({ selectedTabName, onPress }) {
   }
   return (
     <View style={s.container}>
-      <TouchableOpacity onPress={() => onPress("all")} style={s.btn}>
-        <Text style={getTextStyle("all")}>All</Text>
+      <TouchableOpacity onPress={() => onPress("all")}>
+        <Text style={getTextStyle("all")}>All ({countByStatus.all})</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => onPress("inProgress")} style={s.btn}>
-        <Text style={getTextStyle("inProgress")}>In progress</Text>
+      <TouchableOpacity onPress={() => onPress("inProgress")}>
+        <Text style={getTextStyle("inProgress")}>
+          In progress ({countByStatus.inProgress})
+        </Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => onPress("done")} style={s.btn}>
-        <Text style={getTextStyle("done")}>Done</Text>
+      <TouchableOpacity onPress={() => onPress("done")}>
+        <Text style={getTextStyle("done")}>Done ({countByStatus.done})</Text>
       </TouchableOpacity>
     </View>
   );
