@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "react-native-todolist",
-    "slug": "react-native-todolist",
+    "name": "Todo List App",
+    "slug": "todolist-app",
+    "description": "Application permettant de gérer une liste de tâches",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
